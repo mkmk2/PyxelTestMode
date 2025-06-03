@@ -2,7 +2,8 @@
 ## Pyxelの仕様テスト
  pyxel2.4.0で動作確認しています  
 
-https://kitao.github.io/pyxel/wasm/launcher/?play=mkmk2.PyxelTestMode.src.PyxelTestMode&gamepad=enabled
+ 以下のリンクからブラウザで動作確認することができます(一部機能は)
+ [PyxelTestMode](https://kitao.github.io/pyxel/wasm/launcher/?play=mkmk2.PyxelTestMode.src.PyxelTestMode&gamepad=enabled)
 
 
  0:COLOR  
