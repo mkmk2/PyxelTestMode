@@ -2,7 +2,7 @@
 ## Pyxelの仕様テスト
  pyxel2.4.0で動作確認しています  
 
- 以下のリンクからブラウザで動作確認することができます(一部機能は)
+ 以下のリンクからブラウザで動作確認することができます(RELOADなど一部機能は確認できません)    
  [PyxelTestMode](https://kitao.github.io/pyxel/wasm/launcher/?play=mkmk2.PyxelTestMode.src.PyxelTestMode&gamepad=enabled)
 
 
