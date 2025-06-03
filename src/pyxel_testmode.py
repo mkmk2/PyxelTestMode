@@ -1,8 +1,8 @@
 import pyxel
 from enum import Enum
 
-import os           # タイムスタンプ
-import pathlib
+#import os           # タイムスタンプ
+#import pathlib
 
 
 # test no
@@ -63,7 +63,8 @@ class App:
 
         #イメージファイルのタイムスタンプを調べて変化したらリロードする
         if  self.test_mode == TEST_RELOAD:
-            self.file_anim_time = os.path.getmtime(self.file_anim)
+#            self.file_anim_time = os.path.getmtime(self.file_anim)
+            pass
 
         #タイル
         if  self.test_mode == TEST_TILE:
@@ -96,12 +97,12 @@ class App:
         
         if  self.test_mode == TEST_RELOAD:
             # ファイルのタイムスタンプが更新されたらリロードする
-            t = os.path.getmtime(self.file_anim)
-            if self.file_anim_time != t:
-                self.file_anim_time = t
-                pyxel.images[2].load(0, 0, "assets/img_re00.png", incl_colors=True)
-                self.reload_text_time = 60
-
+#            t = os.path.getmtime(self.file_anim)
+#            if self.file_anim_time != t:
+#                self.file_anim_time = t
+#                pyxel.images[2].load(0, 0, "assets/img_re00.png", incl_colors=True)
+#                self.reload_text_time = 60
+            pass
 
         if pyxel.btnp(pyxel.KEY_Q):
             pyxel.quit()
