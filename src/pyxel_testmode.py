@@ -65,6 +65,7 @@ class App:
 
             #イメージファイルのタイムスタンプを調べて変化したらリロードする
             if  self.test_mode == TEST_RELOAD:
+                pyxel.images[2].load(0, 0, "assets/img_re00.png", incl_colors=True)
                 self.file_anim_time = os.path.getmtime(self.file_anim)
 
             #タイル
