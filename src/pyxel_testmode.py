@@ -1,5 +1,6 @@
 import pyxel
 from enum import Enum
+import math
 
 import os           # タイムスタンプ
 import pathlib
@@ -24,6 +25,7 @@ class App:
     reload_text_time = 0
     reload_anim_time = 0
     reload_anim_no = 0
+    tile_rad = 0
 
     #-----------------------------------------------------
     def __init__(self):
@@ -47,27 +49,28 @@ class App:
                     if self.test_mode == TEST_RELOAD:
                         self.file_anim_time = 0     # リロードさせる
 
-        # Color
-        if  self.test_mode == TEST_COLOR:
-            pyxel.colors.from_list([0x000000,0x2B335F,0x7E2072,0x19959C,
-                                    0x8B4852,0x395C98,0xA9C1FF,0xEEEEEE,
-                                    0xD4186C,0xD38441,0xE9C35B,0x70C6A9,
-                                    0x7696DE,0xA3A3A3,0xFF9798,0xEDC7B0])
+            # Color
+            if  self.test_mode == TEST_COLOR:
+                pyxel.colors.from_list([0x000000,0x2B335F,0x7E2072,0x19959C,
+                                        0x8B4852,0x395C98,0xA9C1FF,0xEEEEEE,
+                                        0xD4186C,0xD38441,0xE9C35B,0x70C6A9,
+                                        0x7696DE,0xA3A3A3,0xFF9798,0xEDC7B0])
 
-        # イメージファイルのロード 
-        # 左右で3枚目のみリロードする、パレットは変化しない
-        if  self.test_mode == TEST_IMG_LOAD:
-            pyxel.images[0].load(0, 0, "assets/img00.png", incl_colors=True)
-            pyxel.images[1].load(0, 0, "assets/img01.png", incl_colors=True)
-            pyxel.images[2].load(0, 0, "assets/img02.png", incl_colors=True)
+            # イメージファイルのロード 
+            # 左右で3枚目のみリロードする、パレットは変化しない
+            if  self.test_mode == TEST_IMG_LOAD:
+                pyxel.images[0].load(0, 0, "assets/img00.png", incl_colors=True)
+                pyxel.images[1].load(0, 0, "assets/img01.png", incl_colors=True)
+                pyxel.images[2].load(0, 0, "assets/img02.png", incl_colors=True)
 
-        #イメージファイルのタイムスタンプを調べて変化したらリロードする
-        if  self.test_mode == TEST_RELOAD:
-            self.file_anim_time = os.path.getmtime(self.file_anim)
+            #イメージファイルのタイムスタンプを調べて変化したらリロードする
+            if  self.test_mode == TEST_RELOAD:
+                self.file_anim_time = os.path.getmtime(self.file_anim)
 
-        #タイル
-        if  self.test_mode == TEST_TILE:
-            pyxel.load("./assets/my_resource.pyxres")
+            #タイル
+            if  self.test_mode == TEST_TILE:
+                pyxel.load("./assets/my_resource.pyxres")
+                self.tile_rad = 0
 
 
         #---------------------------------------------
@@ -106,6 +109,7 @@ class App:
         if pyxel.btnp(pyxel.KEY_Q):
             pyxel.quit()
 
+    #-----------------------------------------------------
     def draw(self):
         pyxel.cls(0)
 
@@ -120,6 +124,8 @@ class App:
             pyxel.blt(30, 40, 0, 0, 0, 256, 256)
             pyxel.blt(30, 100, 1, 0, 0, 256, 256)
             pyxel.blt(30, 160, 2, 0, 0, 256, 256)
+
+            pyxel.text(100, 40, str(self.img_no), 10)
 
         if  self.test_mode == TEST_RELOAD:
             # テクスチャReload
@@ -151,8 +157,12 @@ class App:
             pyxel.bltm(0, 0, 0, 0, 256, 256, 240, 0)
             pyxel.bltm(0, 0, 0, 0, 0, 256, 240, 0)
 
+            pyxel.bltm(80 + math.sin(math.radians(self.tile_rad)) * 50, 80, 0, 32, 24, 40, 24, 0)
+            self.tile_rad += 1
+            if self.tile_rad > 360:
+                self.tile_rad = 0
 
-        pyxel.text(100, 40, str(self.img_no), 10)
+                
 
         # Color Bar
         for a in range(0,63, 1):
